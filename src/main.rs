@@ -2,30 +2,23 @@
 extern crate sciter;
 
 mod load_handler;
+mod passgen;
 
 use sciter::Value;
-
-#[derive(Debug)]
-struct PasswordConfig {
-    num_words: u64,
-    capitalization_enabled: bool,
-    punctuation_enabled: bool,
-    number_enabled: bool,
-}
 
 struct EventHandler {}
 
 impl EventHandler {
 
-    fn generate_password(&self, password_config_data: sciter::Value) -> bool {
-        let password_config = &PasswordConfig{
-            num_words: password_config_data.get_item("num-words").to_int().unwrap() as u64,
-            capitalization_enabled: password_config_data.get_item("capitalization-enabled").to_bool().unwrap(),
-            punctuation_enabled: password_config_data.get_item("punctuation-enabled").to_bool().unwrap(),
-            number_enabled: password_config_data.get_item("number-enabled").to_bool().unwrap(),
-        };
-        println!("{:?}", password_config);
-        false
+    fn generate_password(&self, password_config_data: sciter::Value) -> String {
+        let password_config = passgen::config_from_sciter_value(password_config_data);
+        match password_config {
+            Ok(config) => {
+                println!("{:?}", config);
+                String::from("Successfully generated the password!")
+            },
+            Err(e) => e,
+        }
     }
 
 }

@@ -1,23 +1,41 @@
 function self.ready() {
-    self.$(#clear-password).on("click", clearPassword);
+    self.$(#clear).on("click", clearPassword);
     self.$(#generate-password).on("click", generatePassword);
 }
 
 function clearPassword() {
     self.$(#password-generated).$content();
+    self.$(#error-message).$content();
 }
 
 function generatePassword() {
+    if (!validateConfig()) {
+        return;
+    }
+
     var passwordConfig = {};
     passwordConfig["num-words"] = self.$(#num-words).value;
     passwordConfig["capitalization-enabled"] = self.$(#capitalization-enabled).value;
     passwordConfig["punctuation-enabled"] = self.$(#punctuation-enabled).value;
     passwordConfig["number-enabled"] = self.$(#number-enabled).value;
 
-    var success = view.generate_password(passwordConfig);
-    if (success) {
-        self.$(#password-generated).content("Password generated successfully!");
-    } else {
-        self.$(#password-generated).content("Sorry, fail to generate password. :(");
+    var result = view.generate_password(passwordConfig);
+    self.$(#password-generated).content(result);
+}
+
+function validateConfig() {
+    // Only num-words input can have an invalid value, so only validating that
+    const num_pattern = /[0-9]+/;
+    let num_words = self.$(#num-words).value;
+    if (num_words === undefined) {
+        self.$(#password-generated).$content();
+        self.$(#error-message).content("Number of words should not be empty.");
+        return false;
     }
+    if (!num_pattern.test(num_words.toString())) {
+        self.$(#password-generated).$content();
+        self.$(#error-message).content("Number of words is not a valid number");
+        return false;
+    }
+    return true;
 }

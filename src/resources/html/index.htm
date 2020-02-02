@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/tiscript">
+      include "this://app/tis/main.tis"
+    </script>
+    <title>pice</title>
+  </head>
+  <body>
+    <label for="num-words">Number of words:</label>
+    <br>
+    <input type="number" id="num-words" name="num-words" min="1" value="6" />
+    <br />
+    <br />
+    <label for="capitalization-enabled">Include capitalization?</label>
+    <input type="checkbox" id="capitalization-enabled" name="capitalization-enabled" />
+    <br />
+    <br />
+    <label for="punctuation-enabled">Include punctuation?</label>
+    <input type="checkbox" id="punctuation-enabled" name="punctuation-enabled" />
+    <br />
+    <br />
+    <label for="number-enabled">Include number?</label>
+    <input type="checkbox" id="number-enabled" name="number-enabled" />
+    <br />
+    <br />
+    <button id="clear-password">Clear Password</button>
+    <button id="generate-password">Generate Password!</button>
+    <br />
+    <br />
+    <p id="password-generated"></p>
+  </body>
+</html>

@@ -15,7 +15,10 @@ impl EventHandler {
         match password_config {
             Ok(config) => {
                 println!("{:?}", config);
-                String::from("Successfully generated the password!")
+                match passgen::generate(config) {
+                    Ok(components) => components,
+                    Err(e) => e.to_string(),
+                }
             },
             Err(e) => e,
         }
@@ -32,6 +35,10 @@ impl sciter::EventHandler for EventHandler {
 }
 
 fn main() {
+	let _ = sciter::set_options(
+        sciter::RuntimeOptions::ScriptFeatures(sciter::SCRIPT_RUNTIME_FEATURES::ALLOW_FILE_IO as u8 |
+                                               sciter::SCRIPT_RUNTIME_FEATURES::ALLOW_SYSINFO as u8)
+    );
     let _ = sciter::set_options(sciter::RuntimeOptions::DebugMode(true));
 
     let resources = include_bytes!("resources.rc");

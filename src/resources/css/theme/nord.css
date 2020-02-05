@@ -14,7 +14,7 @@ html {
     background-color: @NORD0;
 }
 
-input {
+input[type=button], input[type=number], input[type=text] {
     background: @NORD1;
     color: @NORD8
 }

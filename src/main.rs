@@ -45,7 +45,7 @@ fn main() {
     let handler = load_handler::LoadHandler::new(resources);
 
     let mut frame = sciter::window::Builder::main_window()
-        .with_size((500, 350))
+        .with_size((500, 275))
         .create();
 
     frame.sciter_handler(handler);

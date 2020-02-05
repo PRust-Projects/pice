@@ -1,0 +1,29 @@
+@const NORD0: #2E3440;
+@const NORD1: #3B4252;
+@const NORD2: #434C5E;
+@const NORD3: #4c566a; 
+@const NORD4: #d8dee9;
+@const NORD5: #e5e9f0;
+@const NORD6: #eceff4;
+@const NORD7: #8fbcbb;
+@const NORD8: #88c0d0;
+@const NORD9: #81a1c1;
+@const NORD10: #5e81ac;
+
+html {
+    background-color: @NORD0;
+}
+
+input {
+    background: @NORD1;
+    color: @NORD8
+}
+
+label {
+    color: @NORD7
+}
+
+p {
+    color: @NORD7
+}
+

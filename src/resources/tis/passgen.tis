@@ -1,0 +1,14 @@
+function self.ready() {
+    self.$(#result).content(view.parameters.result);
+    self.$(#copy-password).on("click", copyPassword);
+    self.$(#regenerate-password).on("click", regeneratePassword);
+}
+
+function copyPassword() {
+    view.clipboard(#put, self.$(#result).value);
+}
+
+function regeneratePassword() {
+    let result = view.parameters.generatePassword(view.parameters.passwordConfig);
+    self.$(#result).content(result);
+}

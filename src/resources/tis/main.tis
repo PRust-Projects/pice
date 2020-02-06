@@ -1,4 +1,6 @@
 function self.ready() {
+    self.$(#custom-wordlist).value = view.get_resource_path("wordlists/eff_large.wordlist");
+
     self.$(#generate-password).on("click", generatePassword);
     self.$(#custom-wordlist-selector).on("click", selectCustomWordList);
 }
@@ -34,7 +36,7 @@ function generatePassword() {
 
 function selectCustomWordList() {
     const filter = "Wordlist Files (*.wordlist)|*.wordlist|All Files (*.*)|*.*";
-    let filename = view.selectFile(#open, filter, "wordlist", "wordlists");
+    let filename = view.selectFile(#open, filter, "wordlist", view.get_resource_path("wordlists"));
     if (filename !== undefined) {
         self.$(#custom-wordlist).value = URL.toPath(filename);
     }

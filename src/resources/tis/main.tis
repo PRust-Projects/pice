@@ -25,7 +25,7 @@ function generatePassword() {
     let result = view.generate_password(passwordConfig);
     view.dialog({
         url: "passgen.htm",
-        height: "125px",
+        height: "110px",
         parameters: {
             result: result,
             passwordConfig: passwordConfig,

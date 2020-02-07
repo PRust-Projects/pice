@@ -7,4 +7,6 @@ if [ ! -f "$SCRIPT_DIR/../../target/release/libsciter-gtk.so" ]; then
 	cp $SCRIPT_DIR/package/libsciter-gtk.so $SCRIPT_DIR/../../target/release
 	cp -r $SCRIPT_DIR/package/wordlists $SCRIPT_DIR/../../target/release
 fi
-$SCRIPT_DIR/../../target/release/pice
+if [ -z "$1" ]; then
+    $SCRIPT_DIR/../../target/release/pice
+fi

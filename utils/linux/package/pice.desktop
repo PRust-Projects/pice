@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=pice
+Exec=/opt/pice/pice
+Icon=/opt/pice/pice.png
+Path=/opt/pice
+Terminal=false
+Type=Application

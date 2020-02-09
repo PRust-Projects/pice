@@ -40,6 +40,7 @@ pub fn generate(config: PasswordConfig) -> Result<String, Error> {
     let mut rng = rand::thread_rng();
 
     let mut components = Vec::new();
+    let mut should_capitalize = false;
     for _ in 0..config.num_words {
         match rng.gen_range(0, 6) {
             0 => {
@@ -55,16 +56,16 @@ pub fn generate(config: PasswordConfig) -> Result<String, Error> {
                 }
             },
             2 => {
-                if config.capitalization_enabled {
-                    let mut word = wordlist[rng.gen_range(0, wordlist.len())].clone();
-                    word = word.to_title_case();
-                    components.push(word.clone());
-                }
+                should_capitalize = config.capitalization_enabled;
             },
             _ => {},
         }
 
-        let word = wordlist[rng.gen_range(0, wordlist.len())].clone();
+        let mut word = wordlist[rng.gen_range(0, wordlist.len())].clone();
+        if should_capitalize {
+            word = word.to_title_case();
+            should_capitalize = false;
+        }
         components.push(word.clone());
     }
     println!("{:?}", components);

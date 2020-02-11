@@ -6,5 +6,8 @@ $SCRIPT_DIR/build/packfolder.exe $SCRIPT_DIR/../../src/resources $SCRIPT_DIR/../
 cargo build --release
 if [ ! -f "$SCRIPT_DIR/../../target/release/sciter.dll" ]; then
 	cp $SCRIPT_DIR/package/sciter.dll $SCRIPT_DIR/../../target/release
+	cp -r $SCRIPT_DIR/package/wordlists $SCRIPT_DIR/../../target/release
 fi
-$SCRIPT_DIR/../../target/release/pice.exe
+if [ -z "$1" ]; then
+	$SCRIPT_DIR/../../target/release/pice.exe
+fi

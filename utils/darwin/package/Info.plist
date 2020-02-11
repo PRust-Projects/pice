@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>pice/string>
+	<string>pice</string>
 	<key>CFBundleIconFile</key>
 	<string>pice.icns</string>
 	<key>CFBundleIdentifier</key>

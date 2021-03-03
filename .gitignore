@@ -12,3 +12,10 @@
 
 # Don't include the binary form of resources
 resources.rc
+
+
+# Added by cargo
+#
+# already existing elements were commented out
+
+#/target

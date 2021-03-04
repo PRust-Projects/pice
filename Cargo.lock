@@ -747,6 +747,7 @@ name = "pice"
 version = "0.1.0"
 dependencies = [
  "Inflector",
+ "pango",
  "pretty_env_logger",
  "rand",
  "vgtk",

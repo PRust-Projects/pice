@@ -8,6 +8,7 @@ edition = "2018"
 
 [dependencies]
 Inflector = "0.11"
+pango = "0.9"
 pretty_env_logger = "0.4"
 rand = "0.8"
 vgtk = { git = "https://github.com/bodil/vgtk" }

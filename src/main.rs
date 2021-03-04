@@ -98,7 +98,6 @@ impl Component for App {
                             </Box>
                         </Box>
                         <Box>
-                            <Button label="Reset" />
                             <Button Box::pack_type=PackType::End label="Next" />
                         </Box>
                     </Box>

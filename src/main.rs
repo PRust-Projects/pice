@@ -163,7 +163,7 @@ impl Component for App {
                                 gtk! {
                                     <ButtonBox orientation=Orientation::Vertical layout=ButtonBoxStyle::Spread>
                                         <Label markup="<big><b>Your Password Is:</b></big>" />
-                                        <Label text=self.password.borrow().clone() />
+                                        <Label text=self.password.borrow().clone() line_wrap=true width_chars=50 justify=Justification::Center />
                                         <ButtonBox layout=ButtonBoxStyle::Spread spacing=20>
                                             <Button label="Back" on clicked=|_| Message::SetStep {
                                                 step: Step::Configuration,

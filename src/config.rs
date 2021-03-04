@@ -7,7 +7,7 @@ pub struct Config {
     capitalization_enabled: bool,
     punctuations_enabled: bool,
     digits_enabled: bool,
-    wordlist: RefCell<PathBuf>,
+    wordlist_path: RefCell<PathBuf>,
 }
 
 impl Config {
@@ -27,8 +27,8 @@ impl Config {
         self.digits_enabled
     }
 
-    pub fn get_wordlist(&self) -> String {
-        self.wordlist.borrow().to_string_lossy().to_string()
+    pub fn get_wordlist_path(&self) -> String {
+        self.wordlist_path.borrow().to_string_lossy().to_string()
     }
 
     pub fn set_num_words(&mut self, num_words: String) {
@@ -51,9 +51,9 @@ impl Config {
         self.digits_enabled = !self.digits_enabled;
     }
 
-    pub fn set_wordlist(&self, wordlist_path: Option<PathBuf>) {
-        if let Some(wordlist) = wordlist_path {
-            self.wordlist.replace(wordlist);
+    pub fn set_wordlist_path(&self, wordlist_path: Option<PathBuf>) {
+        if let Some(wordlist_path) = wordlist_path {
+            self.wordlist_path.replace(wordlist_path);
         }
     }
 }
@@ -65,7 +65,7 @@ impl Default for Config {
             capitalization_enabled: false,
             punctuations_enabled: false,
             digits_enabled: false,
-            wordlist: RefCell::new(PathBuf::new()),
+            wordlist_path: RefCell::new(PathBuf::new()),
         }
     }
 }

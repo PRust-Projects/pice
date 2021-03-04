@@ -92,7 +92,7 @@ impl Component for App {
                 UpdateAction::None
             }
             Message::SetWordlist { wordlist } => {
-                self.config.set_wordlist(wordlist);
+                self.config.set_wordlist_path(wordlist);
                 UpdateAction::Render
             }
             Message::GeneratePassword => {
@@ -146,7 +146,7 @@ impl Component for App {
                                                         wordlist: dialog.get_filename(),
                                                     }
                                                 }/>
-                                                <Label Box::pack_type=PackType::End label=self.config.get_wordlist() ellipsize=EllipsizeMode::Middle />
+                                                <Label Box::pack_type=PackType::End label=self.config.get_wordlist_path() ellipsize=EllipsizeMode::Middle />
                                             </Box>
                                         </Box>
                                         <Box>

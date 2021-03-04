@@ -14,7 +14,7 @@ const PUNCTUATIONS: &[&str] = &[
 ];
 
 pub fn generate(config: &Config) -> Result<String> {
-    let wordlist = load_wordlist(&config.get_wordlist())?;
+    let wordlist = load_wordlist(&config.get_wordlist_path())?;
     let mut rng = rand::thread_rng();
 
     let mut components = Vec::new();

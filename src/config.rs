@@ -3,7 +3,7 @@ use std::path::PathBuf;
 
 #[derive(Clone, Debug)]
 pub struct Config {
-    num_words: RefCell<String>,
+    num_words: usize,
     capitalization_enabled: bool,
     punctuations_enabled: bool,
     digits_enabled: bool,
@@ -11,8 +11,8 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn get_num_words(&self) -> String {
-        self.num_words.borrow().to_string()
+    pub fn get_num_words(&self) -> usize {
+        self.num_words
     }
 
     pub fn get_capitalization(&self) -> bool {
@@ -31,9 +31,11 @@ impl Config {
         self.wordlist.borrow().to_string_lossy().to_string()
     }
 
-    pub fn set_num_words(&self, num_words: String) {
-        if num_words.parse::<usize>().is_ok() || num_words.is_empty() {
-            self.num_words.replace(num_words);
+    pub fn set_num_words(&mut self, num_words: String) {
+        if num_words.parse::<usize>().is_ok() {
+            self.num_words = num_words.parse::<usize>().unwrap();
+        } else if num_words.is_empty() {
+            self.num_words = 0;
         }
     }
 
@@ -59,7 +61,7 @@ impl Config {
 impl Default for Config {
     fn default() -> Self {
         Config {
-            num_words: RefCell::new(String::from("0")),
+            num_words: 0,
             capitalization_enabled: false,
             punctuations_enabled: false,
             digits_enabled: false,

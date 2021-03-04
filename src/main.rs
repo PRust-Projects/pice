@@ -1,14 +1,15 @@
 #![recursion_limit = "1024"]
 
 mod config;
+mod passgen;
 
 use std::cell::RefCell;
 use std::path::PathBuf;
 
 use rand::seq::SliceRandom;
 use vgtk::ext::*;
-use vgtk::lib::gio::ApplicationFlags;
 use vgtk::lib::gdk::SELECTION_CLIPBOARD;
+use vgtk::lib::gio::ApplicationFlags;
 use vgtk::lib::gtk::*;
 use vgtk::{gtk, run, Component, UpdateAction, VNode};
 
@@ -96,7 +97,12 @@ impl Component for App {
             }
             Message::GeneratePassword => {
                 let candidates = vec!["hello", "foo", "bar", "omega", "delta"];
-                self.password.replace(candidates.choose(&mut rand::thread_rng()).unwrap().to_string());
+                self.password.replace(
+                    candidates
+                        .choose(&mut rand::thread_rng())
+                        .unwrap()
+                        .to_string(),
+                );
                 UpdateAction::Render
             }
             Message::CopyToClipboard => {
@@ -118,7 +124,7 @@ impl Component for App {
                                         <Box orientation=Orientation::Vertical spacing=10>
                                             <Box>
                                                 <Label label="Number of words" />
-                                                <Entry Box::pack_type=PackType::End input_purpose=InputPurpose::Digits text=self.config.get_num_words() on changed=|entry| {
+                                                <Entry Box::pack_type=PackType::End input_purpose=InputPurpose::Digits text=self.config.get_num_words().to_string() on changed=|entry| {
                                                     Message::SetNumOfWords {
                                                         num_words: entry.get_text().to_string(),
                                                     }

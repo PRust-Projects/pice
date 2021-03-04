@@ -6,6 +6,7 @@ mod passgen;
 use std::cell::RefCell;
 use std::path::PathBuf;
 
+use pango::EllipsizeMode;
 use vgtk::ext::*;
 use vgtk::lib::gdk::SELECTION_CLIPBOARD;
 use vgtk::lib::gio::ApplicationFlags;
@@ -145,7 +146,7 @@ impl Component for App {
                                                         wordlist: dialog.get_filename(),
                                                     }
                                                 }/>
-                                                <Label Box::pack_type=PackType::End label=self.config.get_wordlist() />
+                                                <Label Box::pack_type=PackType::End label=self.config.get_wordlist() ellipsize=EllipsizeMode::Middle />
                                             </Box>
                                         </Box>
                                         <Box>

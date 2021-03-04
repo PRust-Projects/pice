@@ -57,7 +57,7 @@ pub fn load_wordlist<P: AsRef<Path>>(path: P) -> Result<Vec<String>> {
     let mut wordlist = vec![];
     for line in buffered.lines() {
         let line = line?;
-        match line.find("\t") {
+        match line.find('\t') {
             Some(i) => wordlist.push(line[i + 1..].to_string()),
             None => wordlist.push(line),
         }

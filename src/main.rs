@@ -1,3 +1,4 @@
+#![windows_subsystem = "windows"]
 #![recursion_limit = "1024"]
 
 mod config;
@@ -9,11 +10,15 @@ use std::path::PathBuf;
 use pango::EllipsizeMode;
 use vgtk::ext::*;
 use vgtk::lib::gdk::SELECTION_CLIPBOARD;
-use vgtk::lib::gio::ApplicationFlags;
+use vgtk::lib::gdk_pixbuf::Pixbuf;
+use vgtk::lib::gio::{ApplicationFlags, Cancellable, MemoryInputStream};
+use vgtk::lib::glib::Bytes;
 use vgtk::lib::gtk::*;
 use vgtk::{gtk, run, Component, UpdateAction, VNode};
 
 use config::Config;
+
+static ICON: &[u8] = include_bytes!("../assets/pice.png");
 
 #[derive(Clone, Debug)]
 pub struct App {
@@ -108,9 +113,12 @@ impl Component for App {
     }
 
     fn view(&self) -> VNode<Self> {
+        let data_stream = MemoryInputStream::from_bytes(&Bytes::from_static(ICON));
+        let icon = Pixbuf::from_stream(&data_stream, None as Option<&Cancellable>).unwrap();
+
         gtk! {
             <Application::new_unwrap(Some("com.pchan.pice"), ApplicationFlags::empty())>
-                <Window default_width=500 default_height=250 border_width=20 on destroy=|_| Message::Exit>
+                <Window default_width=500 default_height=250 border_width=20 icon=Some(icon) on destroy=|_| Message::Exit>
                     {
                         match self.step {
                             Step::Configuration => {

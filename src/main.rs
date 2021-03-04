@@ -6,7 +6,6 @@ mod passgen;
 use std::cell::RefCell;
 use std::path::PathBuf;
 
-use rand::seq::SliceRandom;
 use vgtk::ext::*;
 use vgtk::lib::gdk::SELECTION_CLIPBOARD;
 use vgtk::lib::gio::ApplicationFlags;
@@ -96,13 +95,8 @@ impl Component for App {
                 UpdateAction::Render
             }
             Message::GeneratePassword => {
-                let candidates = vec!["hello", "foo", "bar", "omega", "delta"];
-                self.password.replace(
-                    candidates
-                        .choose(&mut rand::thread_rng())
-                        .unwrap()
-                        .to_string(),
-                );
+                let password = passgen::generate(&self.config).unwrap();
+                self.password.replace(password);
                 UpdateAction::Render
             }
             Message::CopyToClipboard => {
@@ -163,6 +157,9 @@ impl Component for App {
                                 }
                             }
                             Step::PasswordGeneration => {
+                                let password = passgen::generate(&self.config).unwrap();
+                                self.password.replace(password);
+
                                 gtk! {
                                     <ButtonBox orientation=Orientation::Vertical layout=ButtonBoxStyle::Spread>
                                         <Label markup="<big><b>Your Password Is:</b></big>" />

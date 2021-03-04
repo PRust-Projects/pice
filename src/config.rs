@@ -61,7 +61,7 @@ impl Config {
 impl Default for Config {
     fn default() -> Self {
         Config {
-            num_words: 0,
+            num_words: 6,
             capitalization_enabled: false,
             punctuations_enabled: false,
             digits_enabled: false,
